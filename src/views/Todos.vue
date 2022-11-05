@@ -1,17 +1,16 @@
 <template>
   <div>
-    <h1>Todo List</h1>
+    <h2>Todo List</h2>
     <AddTodo
-    @add-todo="addTodo"
+        @add-todo="addTodo"
     />
     <TodoList
-    v-bind:todos="todos"
-    @remove-todo="removeTodo"
+        v-bind:todos="todos"
+        @remove-todo="removeTodo"
     />
   </div>
 
 </template>
-
 <script>
 import TodoList from '@/components/TodoList'
 import AddTodo from '@/components/AddTodo'
@@ -19,16 +18,14 @@ export default {
   name: 'App',
   data(){
     return{
-      todos:[
-
-      ]
+      todos:[]
     }
   },
   mounted() {
-    fetch('https://jsonplaceholder.typicode.com/todos')
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=3')
         .then(response => response.json())
         .then(json => {
-          this.todos=json
+          this.todos = json
         })
   },
   methods:{
@@ -40,18 +37,7 @@ export default {
     }
   },
   components: {
-  TodoList, AddTodo
+    TodoList, AddTodo
   }
 }
 </script>
-
-<style>
-div {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
-}
-</style>
